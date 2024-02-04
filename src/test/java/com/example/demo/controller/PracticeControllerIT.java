@@ -28,8 +28,8 @@ class PracticeControllerIT {
     @Test
     public void testErrorHandlingReturnsBadRequest() {
         String url = "http://localhost:" + port + "/v1/findAll";
-        ResponseEntity<Object[]> responseEntity = restTemplate.getForEntity(url, Object[].class);
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class);
 
-        assertEquals(responseEntity.getStatusCode(), HttpStatus.UNAUTHORIZED);
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
     }
 }

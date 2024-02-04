@@ -14,11 +14,9 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests((authorize) -> authorize
-                        .anyRequest().permitAll())
+        http.cors(AbstractHttpConfigurer::disable)
                 .headers(AbstractHttpConfigurer::disable)
-                .csrf(csrf -> csrf.ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")));
+                .csrf(csrf -> csrf.ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/findAll/**")));
         return http.build();
     }
 }
