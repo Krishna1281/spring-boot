@@ -9,6 +9,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -33,7 +34,14 @@ public class PracticeServiceImpl implements ProductService {
     public List<Product> getProductInformation(String name) {
         try {
             persistData();
-            return productRepository.findAll();
+            List<Product> products = productRepository.findAll();
+
+            products.sort(Product.NameComparator); // manual sort based on field using comparator
+            products.sort(Product.PriceComparator); // manual sort based on field using comparator
+            Collections.sort(products); // Default sort using comparable
+
+            //products.sort(new Product()); if we want to use just comparator alone with default sort
+            return products;
         } catch (Exception e) {
             throw new RuntimeException("Exception occurred while retrieving product data: " + e.getMessage());
         }
