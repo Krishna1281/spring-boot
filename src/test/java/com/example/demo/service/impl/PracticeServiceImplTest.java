@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.entity.Product;
 import com.example.demo.repository.ProductRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,16 @@ class PracticeServiceImplTest {
         List<Product> productInformation = practiceService.getProductInformation("");
         assertEquals(productInformation.size(), 4);
         verify(productRepository, times(1)).saveAll(any());
+        verify(productRepository, times(1)).findAll();
+    }
+
+    @Test
+    public void testGetProductInformation_Exception() {
+        when(productRepository.findAll()).thenThrow(new RuntimeException("Test Exception"));
+
+        RuntimeException exception = Assertions.assertThrows(RuntimeException.class, () -> practiceService.getProductInformation("Test")
+        );
+        assertEquals("Exception occurred while retrieving product data: Test Exception", exception.getMessage());
         verify(productRepository, times(1)).findAll();
     }
 }
