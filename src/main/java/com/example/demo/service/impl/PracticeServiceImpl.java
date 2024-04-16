@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.aop.LogMethodExecution;
 import com.example.demo.entity.Product;
 import com.example.demo.repository.ProductRepository;
+import com.example.demo.service.Custom;
 import com.example.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -13,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-public class PracticeServiceImpl implements ProductService {
+public class PracticeServiceImpl implements ProductService, Custom {
 
     @Autowired
     private ProductRepository productRepository;
@@ -45,5 +46,10 @@ public class PracticeServiceImpl implements ProductService {
         } catch (Exception e) {
             throw new RuntimeException("Exception occurred while retrieving product data: " + e.getMessage());
         }
+    }
+
+    @Override
+    public void test() {
+        ProductService.super.test();
     }
 }

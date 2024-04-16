@@ -8,4 +8,8 @@ public interface ProductService {
     void persistData() throws Exception;
 
     List<Product> getProductInformation(String name);
+
+    default void test() {
+        System.out.println("abc");
+    }
 }
