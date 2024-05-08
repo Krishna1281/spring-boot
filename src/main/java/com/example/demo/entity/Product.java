@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 
 import java.util.Comparator;
 
@@ -34,7 +35,7 @@ public class Product implements Comparable<Product> {
 
     @GeneratedValue
     @Column
-    @jakarta.persistence.Id
+    @Id
     private Long id;
     @Column
     private String name;

@@ -41,7 +41,7 @@ public class PracticeServiceImpl implements ProductService, Custom {
             products.sort(Product.PriceComparator); // manual sort based on field using comparator
             Collections.sort(products); // Default sort using comparable
 
-            //products.sort(new Product()); if we want to use just comparator alone with default sort
+            //products.sort(new Product()); if we want to use just comparator along with default sort
             return products;
         } catch (Exception e) {
             throw new RuntimeException("Exception occurred while retrieving product data: " + e.getMessage());
@@ -50,6 +50,6 @@ public class PracticeServiceImpl implements ProductService, Custom {
 
     @Override
     public void test() {
-        ProductService.super.test();
+        Custom.super.test(); // need to specify the interface name
     }
 }
